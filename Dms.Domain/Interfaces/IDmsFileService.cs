@@ -9,5 +9,9 @@ namespace Dms.Domain.Interfaces
     public interface IDmsFileService
     {
         Task<IEnumerable<DmsFileView>> GetFileViewsAsync();
+        Task<bool> CheckFileExistAsync(string fileName);
+        Task<int> AddFileAsync(DmsFile dmsFile);
+        Task<DmsFile> GetFileAsync(string fileName);
+        Task DeleteFileAsync(string fileName);
     }
 }

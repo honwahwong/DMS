@@ -1,9 +1,9 @@
 ﻿using Dms.Domain.Interfaces;
 using Dms.Domain.Models;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
-using System;
 using System.Collections.Generic;
-using System.Linq;
+using System.IO;
 using System.Threading.Tasks;
 
 // For more information on enabling Web API for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
@@ -29,28 +29,71 @@ namespace Dms.Api.Controllers
         }
 
         // GET api/<PdfController>/5
-        [HttpGet("{id}")]
-        public string Get(int id)
+        [HttpGet("{fileName}")]
+        public async Task<IActionResult> GetFileAsync(string fileName)
         {
-            return "value";
+            var fileExist = await _dmsFileService.CheckFileExistAsync(fileName);
+            if (!fileExist)
+            {
+                return BadRequest($"File not found: {fileName}");
+            }
+
+            var dmsFile = await _dmsFileService.GetFileAsync(fileName);
+
+            MemoryStream memStream = new MemoryStream(dmsFile.FileContent);
+            memStream.Position = 0;
+            return File(memStream, "application/octet-stream", dmsFile.Name);
         }
 
         // POST api/<PdfController>
         [HttpPost]
-        public void Post([FromBody] string value)
+        public async Task<IActionResult> PostAsync([FromBody] IFormFile file)
         {
-        }
+            if (file == null)
+            {
+                return BadRequest("Invalid input file.");
+            }
 
-        // PUT api/<PdfController>/5
-        [HttpPut("{id}")]
-        public void Put(int id, [FromBody] string value)
-        {
+            if (file.Length > 5000000)
+            {
+                return BadRequest("File too large. File must be under 5Mb size.");
+            }
+
+            var extension = Path.GetExtension(file.FileName);
+            if (extension.ToLower() != ".pdf")
+            {
+                return BadRequest($"Invalid file type: {extension}");
+            }
+
+            var fileExist = await _dmsFileService.CheckFileExistAsync(file.FileName);
+            if (fileExist)
+            {
+                return BadRequest($"File already exists: {file.FileName}");
+            }
+
+            using var ms = new MemoryStream();
+            await file.CopyToAsync(ms);
+            var dmsFile = new DmsFile
+            {
+                Name = file.FileName,
+                FileSize = file.Length,
+                Location = $"http://localhost:49826/api/Values/{file.FileName}", // TODO make base URL configurable 
+                FileContent = ms.ToArray()
+            };
+            return Ok(await _dmsFileService.AddFileAsync(dmsFile));
         }
 
         // DELETE api/<PdfController>/5
-        [HttpDelete("{id}")]
-        public void Delete(int id)
+        [HttpDelete("{fileName}")]
+        public async Task<IActionResult> DeleteAsync(string fileName)
         {
+            var fileExist = await _dmsFileService.CheckFileExistAsync(fileName);
+            if (!fileExist)
+            {
+                return BadRequest($"File not found: {fileName}");
+            }
+            await _dmsFileService.DeleteFileAsync(fileName);
+            return Ok(true);
         }
     }
 }
