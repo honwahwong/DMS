@@ -4,3 +4,10 @@
 
 /.vs
 /Dms.Api/obj
+/Dms.Api/bin/Debug/netcoreapp3.1
+/Dms.Domain/bin/Debug/netcoreapp3.1
+/Dms.Domain/obj
+/Dms.FileService/bin/Debug/netcoreapp3.1
+/Dms.FileService/obj
+/UnitTests/bin/Debug/netcoreapp3.1
+/UnitTests/obj

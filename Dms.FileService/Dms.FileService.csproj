@@ -1,4 +1,4 @@
-<Project Sdk="Microsoft.NET.Sdk.Web">
+﻿<Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
     <TargetFramework>netcoreapp3.1</TargetFramework>
@@ -6,8 +6,6 @@
 
   <ItemGroup>
     <ProjectReference Include="..\Dms.Domain\Dms.Domain.csproj" />
-    <ProjectReference Include="..\Dms.FileService\Dms.FileService.csproj" />
   </ItemGroup>
-
 
 </Project>
