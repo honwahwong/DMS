@@ -11,6 +11,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Dms.Domain", "Dms.Domain\Dm
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Dms.FileService", "Dms.FileService\Dms.FileService.csproj", "{204FB8AA-E81E-4AAD-8333-57C905A3AE53}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "IntegrationTest", "IntegrationTest\IntegrationTest.csproj", "{BBE5C830-A26C-4E46-B558-B2373A66AD4F}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -33,6 +35,10 @@ Global
 		{204FB8AA-E81E-4AAD-8333-57C905A3AE53}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{204FB8AA-E81E-4AAD-8333-57C905A3AE53}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{204FB8AA-E81E-4AAD-8333-57C905A3AE53}.Release|Any CPU.Build.0 = Release|Any CPU
+		{BBE5C830-A26C-4E46-B558-B2373A66AD4F}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{BBE5C830-A26C-4E46-B558-B2373A66AD4F}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{BBE5C830-A26C-4E46-B558-B2373A66AD4F}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{BBE5C830-A26C-4E46-B558-B2373A66AD4F}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

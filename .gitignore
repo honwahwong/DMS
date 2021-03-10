@@ -11,3 +11,5 @@
 /Dms.FileService/obj
 /UnitTests/bin/Debug/netcoreapp3.1
 /UnitTests/obj
+/IntegrationTest/obj
+/IntegrationTest/bin/Debug/netcoreapp3.1
