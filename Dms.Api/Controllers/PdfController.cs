@@ -77,7 +77,7 @@ namespace Dms.Api.Controllers
             {
                 Name = file.FileName,
                 FileSize = file.Length,
-                Location = $"http://localhost:49826/api/Values/{file.FileName}", // TODO make base URL configurable 
+                Location = $"http://localhost:49826/api/pdf/{file.FileName}", // TODO make base URL configurable 
                 FileContent = ms.ToArray()
             };
             return Ok(await _dmsFileService.AddFileAsync(dmsFile));
